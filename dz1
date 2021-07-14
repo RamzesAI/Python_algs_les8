@@ -1,0 +1,19 @@
+'''
+Задание 1. Определить количество различных подстрок с использованием хеш-функции.
+Задача: на вход функции дана строка, требуется вернуть количество различных подстрок в этой строке.
+Для перебора различных вариантов использую модуль itertools -> combinations
+'''
+import itertools
+import hashlib
+
+def count_substr(s):
+    hex_s = hashlib.sha1(s.encode('utf-8')).hexdigest()
+    count_comb = 0
+    for i in range(1, len(hex_s)):
+        a = itertools.combinations(hex_s, i)
+        for j in a:
+            count_comb += 1
+    return count_comb
+
+s = 'hello everybody'
+print(f'Количество различных подстрок: {count_substr(s)}')
